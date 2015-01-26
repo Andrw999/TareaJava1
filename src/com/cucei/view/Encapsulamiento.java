@@ -4,19 +4,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import com.cucei.clases.Tools;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Encapsulamiento extends JFrame {
 
@@ -30,10 +29,29 @@ public class Encapsulamiento extends JFrame {
 	 */
 	
 	class MiFecha{
-		public int dia;
-		public int mes;
-		public int anio;
 		
+		private int dia;
+		private int mes;
+		private int anio;
+		
+		public int getDia() {
+			return dia;
+		}
+		public void setDia(int dia) {
+			this.dia = dia;
+		}
+		public int getMes() {
+			return mes;
+		}
+		public void setMes(int mes) {
+			this.mes = mes;
+		}
+		public int getAnio() {
+			return anio;
+		}
+		public void setAnio(int anio) {
+			this.anio = anio;
+		}
 //		private boolean verificaDia( int dia, int mes, int anio ){
 //			
 //		}
@@ -66,69 +84,86 @@ public class Encapsulamiento extends JFrame {
 	 */
 	public Encapsulamiento() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 353, 300);
+		setBounds(100, 100, 353, 338);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblDateValidator = new JLabel("Date Validator");
 		
-		ButtonGroup btguno = new ButtonGroup( );
 		textField = new JTextField();
-		textField.setEditable(false);
 		textField.setColumns(10);
+		final JComboBox comboBox = new JComboBox();
 	
 		JButton btnValidate = new JButton("Validate");
 		btnValidate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Tools tool = new Tools( );
 				
+				if( tool.inputValidator( textField.getText( ) ) ){
+					
+				} else{
+					JOptionPane.showMessageDialog( null, "El valor debe ser entero" );
+				}
 			}
 		});
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
+		
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setVisible( true );
-				int val = new Encapsulamiento( ).actionCombo = comboBox.getSelectedIndex( );
-				val ++;
+				actionCombo = comboBox.getSelectedIndex( );
+				actionCombo++;
+				JOptionPane.showMessageDialog(null, ""+actionCombo);
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Day", "Mes", "Anio"}));
 		comboBox.setMaximumRowCount(3);
+		
+		JLabel lblInitialDate = new JLabel("Initial Date");
+		
+		JLabel labelDate = new JLabel("");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(81, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnValidate)
-							.addGap(18))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-							.addGap(116))))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(236, Short.MAX_VALUE)
+					.addComponent(btnValidate)
+					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(105)
-					.addComponent(lblDateValidator)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblDateValidator))
 					.addContainerGap(133, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(117)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(153, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(41)
+							.addComponent(lblInitialDate)
+							.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+							.addComponent(labelDate, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(92)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(20, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblDateValidator)
-					.addGap(40)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblInitialDate)
+						.addComponent(labelDate))
+					.addPreferredGap(ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
 					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(33)
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(54)
+					.addGap(45)
 					.addComponent(btnValidate)
-					.addContainerGap(42, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
