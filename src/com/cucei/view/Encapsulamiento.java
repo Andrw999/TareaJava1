@@ -14,8 +14,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import com.cucei.clases.DateGen;
 import com.cucei.clases.Tools;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 
 public class Encapsulamiento extends JFrame {
 
@@ -23,6 +25,8 @@ public class Encapsulamiento extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	public int actionCombo;
+	public DateGen dateG;
+	public JLabel labelDate;
 
 	/**
 	 * INNER CLASS BLOCK
@@ -52,9 +56,39 @@ public class Encapsulamiento extends JFrame {
 		public void setAnio(int anio) {
 			this.anio = anio;
 		}
-//		private boolean verificaDia( int dia, int mes, int anio ){
-//			
-//		}
+		
+		public boolean fijaDia( int dia ){
+			if( dia >= 1 && dia <= 31 ){
+				return true;
+			} else{
+				return false;
+			}
+		}
+		
+		public boolean fijaMes( int mes ){
+			if( mes >= 1 && mes <= 12 ){
+				return true;
+			} else{
+				return false;
+			}
+		}
+		
+		public boolean fijaAnio( int year ){
+			if( year >= Integer.MIN_VALUE && year <= Integer.MAX_VALUE ){
+				return true;
+			} else{
+				return false;
+			}
+		}
+		
+		private boolean verificaFecha( int dia, int mes, int anio ){
+			//validate febrary
+			if( dateG.mod4(anio) ){
+				JOptionPane.showMessageDialog(null, "El mes es bisiesto");
+			} 
+			boolean flag = false;
+			return flag;
+		}
 	}
 	
 	/*********************/
@@ -62,16 +96,24 @@ public class Encapsulamiento extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public void execute(  ){
+	
+	public MiFecha miFecha(){
+		return new MiFecha();
 	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				
-				
 				try {
 					Encapsulamiento frame = new Encapsulamiento();
 					frame.setVisible(true);
+					DateGen dg = new DateGen( );
+					String date = dg.dateGenerator( );
+					Encapsulamiento.MiFecha fecha =  frame.miFecha( );
+					fecha.setAnio( Integer.parseInt( date.split("/")[2] ) );
+					fecha.setMes( Integer.parseInt( date.split("/")[1] ) );
+					fecha.setDia( Integer.parseInt( date.split("/")[0] ) );
+					frame.labelDate.setText( date );
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -88,22 +130,60 @@ public class Encapsulamiento extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
 		JLabel lblDateValidator = new JLabel("Date Validator");
+		JLabel lblInitialDate = new JLabel("Initial Date");
+		lblInitialDate.setFont(new Font("Dialog", Font.BOLD, 14));
+		labelDate = new JLabel("");
+		labelDate.setFont(new Font("Dialog", Font.BOLD, 14));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
 		final JComboBox comboBox = new JComboBox();
+		this.actionCombo = 1;
 	
 		JButton btnValidate = new JButton("Validate");
 		btnValidate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tools tool = new Tools( );
-				
+				int dateField = 0, dia, mes, anio;
+				String dateTest = labelDate.getText( );
 				if( tool.inputValidator( textField.getText( ) ) ){
-					
+					Encapsulamiento.MiFecha fecha =  new Encapsulamiento().miFecha( );
+					switch(actionCombo){
+					case 1:
+						dateField = Integer.parseInt( textField.getText( ) );
+						if(fecha.fijaDia(dateField)){
+							mes = Integer.parseInt( dateTest.split("/")[1] );
+							anio = Integer.parseInt( dateTest.split("/")[2] );
+							fecha.verificaFecha( dateField, mes, anio );
+						} else{
+							JOptionPane.showMessageDialog(null, "Valo invalido para el dia");
+						}
+						break;
+					case 2:
+						dateField = Integer.parseInt( textField.getText() );
+						if(fecha.fijaMes(dateField)){
+							dia = Integer.parseInt( dateTest.split("/")[0] );
+							anio = Integer.parseInt( dateTest.split("/")[2] );
+							fecha.verificaFecha( dia, dateField, anio );
+						} else{
+							JOptionPane.showMessageDialog(null, "Valor invalido para el mes: ");
+						}
+						break;
+					case 3:
+						dateField = Integer.parseInt( textField.getText( ) );
+						if(fecha.fijaAnio(dateField)){
+							dia = Integer.parseInt( dateTest.split("/")[0] );
+							mes = Integer.parseInt( dateTest.split("/")[1] );
+							fecha.verificaFecha( dia, mes, dateField );
+						} else{
+							JOptionPane.showMessageDialog(null, "Valor invalido para el anio: ");
+						}
+						break;
+					default:
+						break;
+					}
 				} else{
-					JOptionPane.showMessageDialog( null, "El valor debe ser entero" );
 				}
 			}
 		});
@@ -113,15 +193,10 @@ public class Encapsulamiento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				actionCombo = comboBox.getSelectedIndex( );
 				actionCombo++;
-				JOptionPane.showMessageDialog(null, ""+actionCombo);
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Day", "Mes", "Anio"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Day", "Month", "Year"}));
 		comboBox.setMaximumRowCount(3);
-		
-		JLabel lblInitialDate = new JLabel("Initial Date");
-		
-		JLabel labelDate = new JLabel("");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

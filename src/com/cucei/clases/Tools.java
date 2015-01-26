@@ -13,7 +13,7 @@ public class Tools {
 				flag = false;
 			}
 		} catch( NumberFormatException fe ){
-			JOptionPane.showMessageDialog(null, fe.toString( ));
+			JOptionPane.showMessageDialog(null, "El Valor debe ser un número:\n\"Entero\"");
 		}
 		
 		return flag;
