@@ -7,31 +7,6 @@ import java.util.Random;
 public class DateGen {
 	public Calendar date;
 	
-	public boolean mod4( int year ){
-		if( (year % 4 == 0) ){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	
-	public boolean mod100( int year ){
-		if( year % 100 == 0 ){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	public boolean mod400( int year ){
-		if( year % 400 == 0 ){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
 	public String dateGenerator( ){
 		int negativeYear = -2000;
 		int maxYear = 2000;

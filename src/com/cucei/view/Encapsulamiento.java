@@ -82,10 +82,149 @@ public class Encapsulamiento extends JFrame {
 		}
 		
 		private boolean verificaFecha( int dia, int mes, int anio ){
-			//validate febrary
-			if( dateG.mod4(anio) ){
-				JOptionPane.showMessageDialog(null, "El mes es bisiesto");
-			} 
+			if( (anio % 4 == 0) && ((anio % 100 != 0) || (anio % 400 == 0)) ){
+				switch( mes ){
+				case 1:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Enero en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 2:
+					if( dia > 29){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Febrero solo tiene 29 dias en anio bisiesto");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Febrero");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 3:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Marzo en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 4:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Abril solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Abril");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 5:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Mayo en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 6:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Junio solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Junio en este año");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 7:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Julio en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 8:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Agosto en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 9:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Septiembre solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Septiembre en este año");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 10:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Octubre en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 11:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Noviembre solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Noviembre en este año");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 12:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Diciembre en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				}
+			} else{
+				switch( mes ){
+				case 1:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Enero en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 2:
+					if( dia > 28){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Febrero solo tiene 29 dias en anio bisiesto");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Febrero");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 3:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Marzo en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 4:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Abril solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Abril");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 5:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Mayo en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 6:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Junio solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Junio en este año");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 7:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Julio en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 8:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Agosto en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 9:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Septiembre solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Septiembre en este año");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 10:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Octubre en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				case 11:
+					if( dia > 30){
+						JOptionPane.showMessageDialog(null, "Fecha Equivocada Noviembre solo tiene 30");
+					} else{
+						JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Noviembre en este año");
+						labelDate.setText(dia+"/"+mes+"/"+anio);
+					}
+					break;
+				case 12:
+					JOptionPane.showMessageDialog(null, "Fecha Correcta para el mes de Diciembre en este año");
+					labelDate.setText(dia+"/"+mes+"/"+anio);
+					break;
+				}
+			}
 			boolean flag = false;
 			return flag;
 		}
